@@ -8,5 +8,11 @@
  */
 class Database
 {
+  private $host;
+  private $user;
+  private $pass;
+  private $banco;
+  private $query;
+  
 
 }
