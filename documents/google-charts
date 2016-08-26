@@ -1,0 +1,703 @@
+You can copy the snippet below to an .html file on your computer and open it in your browser to display the pie chart shown above:
+
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
+How About a Bar Chart?
+
+Convert the pie chart to a bar chart by replacing google.visualization.PieChart with google.visualization.BarChart in the code and reloading your browser. You may notice that the "Slices" legend is truncated. To fix this, change width to 500 from 400, save the file, and reload your browser.
+
+
+Load the Libraries
+
+This page shows how to load the Google Chart libraries.
+
+Basic Library Loading
+
+With few exceptions, all web pages with Google Charts should include the following lines in the <head> of the web page:
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+</script>
+The code above assumes you want to display a corechart (bar, column, line, area, stepped area, bubble, pie, donut, combo, candlestick, histogram, scatter). If you want a different or additional chart type, substitute or add the appropriate package name for corechart above (e.g., {packages: ['corechart', 'table', 'sankey']}. (You can find the package name in the documentation page for each chart. Note that as of December 2015, Geocharts need to be loaded in a different way; see the Geochart documentation for details.)
+
+current causes the latest official release of Google Charts to be loaded. If you want to try the candidate for the next release, use upcoming instead. In general there will be very little difference between the two, and they'll be completely identical except when a new release is underway. A common reason to use upcoming is that you want to test a new chart type or feature that Google is about to release in the next month or two. (We announce upcoming releases on our forum and recommend that you try them out when announced, to be sure that changes to your charts are acceptable.)
+
+This code also assumes that you have a JavaScript function called drawChart later on in your web page. You can name that function whatever you like, but be sure it matches what you pass to google.charts.setOnLoadCallback.
+
+Note: Previous versions of Google Charts used code that differs from the above to load the libraries. To update your existing charts to use the new code, see Update Library Loader Code.
+
+Here is an example of drawing a pie chart using the basic loading technique:
+
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Nitrogen', 0.78],
+        ['Oxygen', 0.21],
+        ['Other', 0.01]
+      ]);
+
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+      chart.draw(data, null);
+    }
+  </script>
+</head>
+<body>
+<!-- Identify where the chart should be drawn. -->
+
+<div id="myPieChart"/>
+</body>
+There are three minor but important limitations with loading Google Charts that we expect to resolve in the near future:
+
+You can only call google.charts.load() once. But you can list all the packages that you'll need in one call, so there's no need to make separate calls.
+You can't autoload the library.
+If you're using a ChartWrapper, you must explicitly load all the packages you'll need, rather than relying on the ChartWrapper to automatically load them for you.
+For Geochart and Map Chart, you must load both the old library loader and the new library loader.
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+Frozen Versions
+
+When we release new versions of Google Charts, some of the changes are big, like entirely new chart types. Other changes are small, like enhancements to the appearance or behavior of existing charts.
+
+Many Google Chart creators fine-tune the look and feel of their charts until it's exactly what they want. Some creators might feel more comfortable knowing that their charts will never change, regardless of what improvements we make in the future. For those users, we support frozen Google Charts.
+
+Frozen chart versions are identified by number, and they're described in our release notes. To load a frozen version, replace current or upcoming in your library load with the frozen version number:
+
+<script type="text/javascript"
+        src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('43', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    ...
+</script>
+We expect that frozen versions will remain available indefinitely, though we may retire frozen versions that have security concerns. We will typically not provide support for frozen versions, except to unhelpfully suggest that you upgrade to a newer version.
+
+Update Library Loader Code
+
+Previous versions of Google Charts used different code to load the libraries. The table below shows the old library loader code versus the new.
+
+Old Library Loader Code
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+</script>
+
+New Library Loader Code
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+</script>
+
+To update your existing charts, you can replace the old library loader code with the new code. However, keep in mind the limitations on loading libraries described above.
+
+Locales
+
+Locales are used to customize text for a country or language, affecting the formatting of values such as currencies, dates, and numbers.
+
+By default, the Google Chart libraries are loaded with the "en" locale. You can override this default by explicitly specifying a locale in the loading parameters.
+
+To load a chart formatted for a specific locale, use the language parameter like so:
+
+  // Load Google Charts for the Japanese locale.
+  google.charts.load('current', {'packages':['corechart'], 'language': 'ja'});
+Follow this link for a live example.
+
+
+Prepare the Data
+
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 3],
+        ['Onions', 1],
+        ['Olives', 1],
+        ['Zucchini', 1],
+        ['Pepperoni', 2]
+      ]);
+
+      // Set chart options
+      var options = {'title':'How Much Pizza I Ate Last Night',
+                     'width':400,
+                     'height':300};
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+
+  <body>
+<!--Div that will hold the pie chart-->
+    <div id="chart_div" style="width:400; height:300"></div>
+  </body>
+</html>
+
+
+Create a DataTable
+
+All charts require data. Google Chart Tools charts require data to be wrapped in a JavaScript class called google.visualization.DataTable. This class is defined in the Google Visualization library that you loaded previously.
+
+A DataTable is a two-dimensional table with rows and columns, where each column has a datatype, an optional ID, and an optional label. The example above creates the following table:
+
+type: string
+label: Topping	type: number
+label: Slices
+Mushrooms	3
+Onions	1
+Olives	1
+Zucchini	1
+Pepperoni	2
+There are several ways to create a DataTable; you can see a list and comparison of each technique in DataTables and DataViews. You can modify your data after you add it, and add, edit, or remove columns and rows.
+
+You must organize your chart's DataTable in a format that the chart expects: for instance, both the Bar and Pie charts require a two-column table where each row represents a slice or bar. The first column is the slice or bar label, and the second column is the slice or bar value. Other charts require different and possibly more complex table formats. See your chart's documentation to learn the required data format.
+
+Rather than populate a table yourself, you could instead query a website that supports the Chart Tools Datasource protocol--for example, a Google Spreadsheets page. Using the google.visualization.Query object, you can send a query to a website and receive a populated DataTable object that you can pass into your chart. See the advanced topic Querying a Datasource to learn how to send a query.
+
+
+Customize the Chart
+
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+          // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 3],
+        ['Onions', 1],
+        ['Olives', 1],
+        ['Zucchini', 1],
+        ['Pepperoni', 2]
+      ]);
+
+// Set chart options
+      var options = {'title':'How Much Pizza I Ate Last Night',
+                     'width':400,
+                     'height':300};
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+
+  <body>
+<!--Div that will hold the pie chart-->
+    <div id="chart_div" style="width:400; height:300"></div>
+  </body>
+</html>
+
+
+Specify options
+
+Every chart has many customizable options, including title, colors, line thickness, background fill, and so on. Although the Chart Tools team has worked hard on the default chart appearance, you might want to customize your chart, for example to add titling or axis labels.
+
+Specify custom options for your chart by defining a JavaScript object with option_name/option_value properties. Use the option names listed in the chart's documentation. Every chart's documentation lists a set of customizable options. For example, the options available for the Pie Chart include 'legend', 'title', and 'is3D'. All options have a documented default value.
+
+The following object defines the legend position, chart title, chart size, and a 3D option for a Pie Chart:
+
+var options = {
+  'legend':'left',
+  'title':'My Big Pie Chart',
+  'is3D':true,
+  'width':400,
+  'height':300
+}
+Update the options object in the example above with these values to see how they affect the chart.
+
+Specify Chart Size
+
+One very common option to set is the chart height and width. You can specify the chart size in two places: in the HTML of the container <div> element, or in the chart options. If you specify the size in both locations, the chart will generally defer to the size specified in the HTML. If you don't specify a chart size either in the HTML or as an option, the chart might not be rendered properly.
+
+There are advantages to specifying the size in one or the other place:
+
+Specifying the size in HTML - A chart can take a few seconds to load and render. If you have the chart container already sized in HTML, the page layout won't jump around when the chart is loaded.
+Specifying the size as a chart option - If the chart size is in the JavaScript, you can copy and paste, or serialize, save, and restore the JavaScript and have the chart resized consistently.
+
+
+
+Draw Multiple Charts
+
+This page shows how to draw multiple charts on one web page.
+
+Draw Multiple Charts on One Page
+
+If you want to draw multiple charts on one web page, include code for the following in the <head> of the page:
+
+Load all the packages required by your charts in a single call to google.charts.load().
+For each chart on the page, add a call to google.charts.setOnLoadCallback() with the callback that draws the chart as an input - for example, google.charts.setOnLoadCallback(myPieChart).
+For example, suppose you want to draw two pie charts, showing how much pizza your friends Sarah and Anthony ate last night. The following example shows how to display both charts side-by-side.
+
+
+CODE IT YOURSELF ON JSFIDDLE
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load Charts and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart for Sarah's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawSarahChart);
+
+      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawAnthonyChart);
+
+      // Callback that draws the pie chart for Sarah's pizza.
+      function drawSarahChart() {
+
+        // Create the data table for Sarah's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 1],
+          ['Onions', 1],
+          ['Olives', 2],
+          ['Zucchini', 2],
+          ['Pepperoni', 1]
+        ]);
+
+        // Set options for Sarah's pie chart.
+        var options = {title:'How Much Pizza Sarah Ate Last Night',
+                       width:400,
+                       height:300};
+
+        // Instantiate and draw the chart for Sarah's pizza.
+        var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+        chart.draw(data, options);
+      }
+
+      // Callback that draws the pie chart for Anthony's pizza.
+      function drawAnthonyChart() {
+
+        // Create the data table for Anthony's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 2],
+          ['Onions', 2],
+          ['Olives', 2],
+          ['Zucchini', 0],
+          ['Pepperoni', 3]
+        ]);
+
+        // Set options for Anthony's pie chart.
+        var options = {title:'How Much Pizza Anthony Ate Last Night',
+                       width:400,
+                       height:300};
+
+        // Instantiate and draw the chart for Anthony's pizza.
+        var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <!--Table and divs that hold the pie charts-->
+    <table class="columns">
+      <tr>
+        <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+Using a Single Callback to Draw Multiple Charts
+
+The previous example uses two callbacks to draw the charts, because the data for the two charts are different. If you want to draw multiple charts for the same data, it may be more convenient to write a single callback for both charts. The following example illustrates this.
+
+
+CODE IT YOURSELF ON JSFIDDLE
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load Charts and the corechart and barchart packages.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart and bar chart when Charts is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        var piechart_options = {title:'Pie Chart: How Much Pizza I Ate Last Night',
+                       width:400,
+                       height:300};
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        piechart.draw(data, piechart_options);
+
+        var barchart_options = {title:'Barchart: How Much Pizza I Ate Last Night',
+                       width:400,
+                       height:300,
+                       legend: 'none'};
+        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+        barchart.draw(data, barchart_options);
+      }
+</script>
+<body>
+    <!--Table and divs that hold the pie charts-->
+    <table class="columns">
+      <tr>
+        <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+Visualization: Table
+
+Overview
+
+A table that can be sorted and paged. Table cells can be formatted using format strings, or by directly inserting HTML as cell values. Numeric values are right-aligned; boolean values are displayed as check marks. Users can select single rows either with the keyboard or the mouse. Users can sort rows by clicking on column headers. The header row remains fixed as the user scrolls. The table fires a number of events corresponding to user interaction.
+
+Example
+
+
+CODE IT YOURSELF ON JSFIDDLE
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('number', 'Salary');
+        data.addColumn('boolean', 'Full Time Employee');
+        data.addRows([
+          ['Mike',  {v: 10000, f: '$10,000'}, true],
+          ['Jim',   {v:8000,   f: '$8,000'},  false],
+          ['Alice', {v: 12500, f: '$12,500'}, true],
+          ['Bob',   {v: 7000,  f: '$7,000'},  true]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+    </script>
+  </head>
+  <body>
+    <div id="table_div"></div>
+  </body>
+</html>
+Loading
+
+The google.charts.load package name is "table".
+
+  google.charts.load('current', {packages: ['table']});
+The visualization's class name is google.visualization.Table.
+
+  var visualization = new google.visualization.Table(container);
+Data Format
+
+The DataTable is converted into a corresponding HTML table, with each row/column in the DataTable converted into a row/column in the HTML table. Each column must be of the same data type, and all standard visualization data types are supported (string, boolean, number, etc).
+
+Custom Properties
+
+You can assign the following custom properties to data table elements, using the setProperty() method of DataTable.
+
+Property Name	Applies To	Description
+className	Cell	A string class name to assign to an individual cell. Use this to assign CSS styling to individual cells.
+style	Cell	A style string to assign inline to the cell. This will override CSS class styles applied to that cell. You must set the property allowHtml=true for this to work. Example: 'border: 1px solid green;'.
+Example
+
+dataTable.setCell(22, 2, 15, 'Fifteen', {style: 'font-style:bold; font-size:22px;'});
+Configuration Options
+
+Name
+allowHtml
+If set to true, formatted values of cells that include HTML tags will be rendered as HTML. If set to false, most custom formatters will not work properly.
+
+Type: boolean
+Default: false
+alternatingRowStyle
+Determines if alternating color style will be assigned to odd and even rows.
+
+Type: boolean
+Default: true
+cssClassNames
+An object in which each property name describes a table element, and the property value is a string, defining a class to assign to that table element. Use this property to assign custom CSS to specific elements of your table. To use this property, assign an object, where the property name specifies the table element, and the property value is a string, specifying a class name to assign to that element. You must then define a CSS style for that class on your page. The following property names are supported:
+
+headerRow - Assigns a class name to the table header row (<tr> element).
+tableRow - Assigns a class name to the non-header rows (<tr> elements).
+oddTableRow - Assigns a class name to odd table rows (<tr> elements). Note: the alternatingRowStyle option must be set to true.
+selectedTableRow - Assigns a class name to the selected table row (<tr> element).
+hoverTableRow - Assigns a class name to the hovered table row (<tr> element).
+headerCell - Assigns a class name to all cells in the header row (<td> element).
+tableCell - Assigns a class name to all non-header table cells (<td> element).
+rowNumberCell - Assigns a class name to the cells in the row number column (<td> element). Note: the showRowNumber option must be set to true.
+Example: var cssClassNames = {headerRow: 'bigAndBoldClass',
+hoverTableRow: 'highlightClass'};
+
+Note: In CSS, some elements override others. For instance, if you specify a background color for a <tr> element and a <td> element, the latter takes precedence over the former. Be sure to specify all relevant CSS styles in cssClassNames to avoid conflicts.
+
+Type: object
+Default: null
+firstRowNumber
+The row number for the first row in the dataTable. Used only if showRowNumber is true.
+
+Type: number
+Defaul: 1
+frozenColumns
+The number of columns from the left that will be frozen. These columns will remain in place when scrolling the remaining columns horizontally. If showRowNumber is false, setting frozenColumns to 0 will appear the same as if set to null, but if showRowNumber is set to true, the row number column will be frozen.
+
+Type: number
+Default: null
+height
+Sets the height of the visualization's container element. You can use standard HTML units (for example, '100px', '80em', '60'). If no units are specified the number is assumed to be pixels. If not specified, the browser will adjust the height automatically to fit the table, shrinking as much as possible in the process; if set smaller than the height required, the table will add a vertical scroll bar (the header row is also frozen). If set to '100%', the table will expand as much as possible into the container element.
+
+Type: string
+Default: automatic
+page
+If and how to enable paging through the data. Choose one of the following string values:
+
+'enable' - The table will include page-forward and page-back buttons. Clicking on these buttons will perform the paging operation and change the displayed page. You might want to also set the pageSize option.
+'event' - The table will include page-forward and page-back buttons, but clicking them will trigger a 'page' event and will not change the displayed page. This option should be used when the code implements its own page turning logic. See the TableQueryWrapper example for an example of how to handle paging events manually.
+'disable' - [Default] Paging is not supported.
+Type: string
+Default: 'disable'
+pageSize
+The number of rows in each page, when paging is enabled with the page option.
+
+Type: number
+Default: 10
+pagingButtons
+Sets a specified option for the paging buttons. The options are as follows:
+
+'both' - enable prev and next buttons
+'prev' - only prev button is enabled
+'next' - only next button is enabled
+'auto' - the buttons are enabled according to the current page. On the first page only next is shown. On the last page only prev is shown. Otherwise both are enabled.
+number - the number of paging buttons to show. This explicit number will override computed number from pageSize.
+Type: string or number
+Default: 'auto'
+rtlTable
+Adds basic support for right-to-left languages (such as Arabic or Hebrew) by reversing the column order of the table, so that column zero is the rightmost column, and the last column is the leftmost column. This does not affect the column index in the underlying data, only the order of display. Full bi-directional (BiDi) language display is not supported by the table visualization even with this option. This option will be ignored if you enable paging (using the page option), or if the table has scroll bars because you have specified height and width options smaller than the required table size.
+
+Type: boolean
+Default: false
+scrollLeftStartPosition
+Sets the horizontal scrolling position, in pixels, if the table has horizontal scroll bars because you have set the width property. The table will open scrolled that many pixels past the leftmost column.
+
+Type: number
+Default: 0
+showRowNumber
+If set to true, shows the row number as the first column of the table.
+
+Type: boolean
+Default: false
+sort
+If and how to sort columns when the user clicks a column heading. If sorting is enabled, consider setting the sortAscending and sortColumn properties as well. Choose one of the following string values:
+
+'enable' - [Default] Users can click on column headers to sort by the clicked column. When users click on the column header, the rows will be automatically sorted, and a 'sort' event will be triggered.
+'event' - When users click on the column header, a 'sort' event will be triggered, but the rows will not be automatically sorted. This option should be used when the page implements its own sort. See the TableQueryWrapper example for an example of how to handle sorting events manually.
+'disable' - Clicking a column header has no effect.
+Type: string
+Default: 'enable'
+sortAscending
+The order in which the initial sort column is sorted. True for ascending, false for descending. Ignored if sortColumn is not specified.
+
+Type: boolean
+Default: true
+sortColumn
+An index of a column in the data table, by which the table is initially sorted. The column will be marked with a small arrow indicating the sort order.
+
+Type: number
+Default: -1
+startPage
+The first table page to display. Used only if page is in mode enable/event.
+
+Type: number
+Default: 0
+width
+Sets the width of the visualization's container element. You can use standard HTML units (for example, '100px', '80em', '60'). If no units are specified the number is assumed to be pixels. If not specified, the browser will adjust the width automatically to fit the table, shrinking as much as possible in the process; if set smaller than the width required, the table will add a horizontal scroll bar. If set to '100%', the table will expand as much as possible into the container element.
+
+Type: string
+Default: automatic
+Methods
+
+Method
+draw(data, options)
+Draws the table.
+
+Return Type: none
+getSelection()
+Standard getSelection implementation. Selection elements are all row elements. Can return more than one selected row. The row indexes in the selection object refer to the original data table regardless of any user interaction (sort, paging, etc.).
+
+Note that the selection(s) toggle: clicking a cell the first time selects it; clicking the cell again deselects it, resulting in a selection event, but no selected items in the retrieved selection object.
+
+Return Type: Array of selection elements
+getSortInfo()
+Call this method to retrieve information about the current sort stateof a table that has been sorted (typically by the user, who has clicked on a column heading to sort the rows by a specific column). If you have disabled sorting, this method will not work.
+
+If you have not sorted data in code, or the user has not sorted data by selecting code, the default sort values will be returned.
+
+Return Type: An object with the following properties:
+column - (number) Index of the column by which the table is sorted.
+ascending - (boolean) true if the sort is ascending, false if descending.
+sortedIndexes - (numeric array) Array of numbers, where the index in the array is the row number as sorted (in the visible table), and the value is the index of that row in the underlying (unsorted) data table.
+setSelection(selection)
+Standard setSelection() implementation, but can only select entire rows, or multiple rows. The row indexes in the selection object refer to the original data table regardless of any user interaction (sort, paging, etc.).
+
+Return Type: none
+clearChart()
+Clears the chart, and releases all of its allocated resources.
+
+Return Type: none
+Events
+
+Name
+select
+Standard select event, but only entire rows can be selected.
+
+Properties: None
+page
+Triggered when users click on a page navigation button.
+
+Properties: page: Number. The index of page to navigate to.
+sort
+Triggered when users click on a column header, and the sort option is not 'disable'.
+
+Properties: An object with the following properties:
+column - (number) Index of the column by which the table is sorted.
+ascending - (boolean) true if the sort is ascending, false if descending.
+sortedIndexes - (numeric array) Array of numbers, wherethe index in the array is the row number as sorted (in the visible table), and the value is the index of that row in the underlying (unsorted) data table.
+ready
+The chart is ready for external method calls. If you want to interact with the chart, and call methods after you draw it, you should set up a listener for this event before you call the draw method, and call them only after the event was fired.
+
+Properties: None
+Formatters
+
+Note: The table visualization has a set of formatter objects that have been superceded by generic formatters, which behave the same way, but can be used in any visualization.
+
+The following table shows the legacy table formatter and its equivalent generic formatter. You should use the generic formatter when writing new code.
+
+Table Formatter
+TableArrowFormat	google.visualization.ArrowFormat
+TableBarFormat	google.visualization.BarFormat
+TableColorFormat	google.visualization.ColorFormat
+TableDateFormat	google.visualization.DateFormat
+TableNumberFormat	google.visualization.NumberFormat
+TablePatternFormat	google.visualization.PatternFormat
+
+
+
+
+
+
+
+
+

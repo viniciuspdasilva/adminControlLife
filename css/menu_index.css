@@ -1,0 +1,204 @@
+.Aprovalista {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 210px;
+    height: 188px;
+    background: url(../img/Portal_icone_3.0mod1.5.png) no-repeat;
+}
+.Aprovalista span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_3.0mod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.Aprovalista:hover span {
+    opacity: 1;
+}
+
+.Solicita {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 210px;
+    height: 188px;
+    background: url(../img/Portal_icone_solicitamod1.5.png) no-repeat;
+}
+.Solicita span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_solicitamod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.Solicita:hover span {
+    opacity: 1;
+}
+
+.RFBGest {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 210px;
+    height: 188px;
+    background: url(../img/Portal_icone_RFB_gestaomod1.5.png) no-repeat;
+}
+.RFBGest span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_RFB_gestaomod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.RFBGest:hover span {
+    opacity: 1;
+}
+
+.RFB {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 210px;
+    height: 188px;
+    background: url(../img/Portal_icone_RFBmod1.5.png) no-repeat;
+}
+.RFB span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_RFBmod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.RFB:hover span {
+    opacity: 1;
+}
+
+.Ada {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 210px;
+    height: 188px;
+    background: url(../img/Portal_icone_adamod1.5.png) no-repeat;
+}
+.Ada span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_adamod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.Ada:hover span {
+    opacity: 1;
+}
+
+.ListaTel {
+    display: inline-block;
+    position: relative;
+    text-indent: -9999px;
+    width: 199px;
+    height: 188px;
+    background: url(../img/Portal_icone_telefonemod1.5.png) no-repeat;
+}
+.ListaTel span {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: url(../img/Portal_icone_telefonemod1.5.png) no-repeat;
+    background-position: 0px -189px;	
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:    opacity 0.5s;
+    -o-transition:      opacity 0.5s;
+}
+.ListaTel:hover span {
+    opacity: 1;
+}
+
+.divCentral {
+    position:absolute; 
+    top:50%; 
+    margin-top:-150px;
+    left:50%;
+    margin-left:-150px;
+    bottom:50%; 
+    margin-bottom:-100px;
+    right:50%;
+    margin-right:-100px;
+}
+
+.divTitulo{
+	left: 50%;
+	margin-left: -275px;
+	position: relative;
+	width: 800px;
+}
+
+.divSubTitulo{
+	left: 50%;
+	margin-left: -50px;
+	position: relative;
+	width: 800px;
+}
+.divBtnLogin{
+	left: 50%;
+	margin-left: -138px;
+	position: relative;
+	width: 800px;
+}
+
+.tableMENUcentral{
+	position:relative; 
+    top:50%; 
+    margin-top:5%;
+    left:0%;
+    margin-left:-28%;
+    bottom:10%; 
+    margin-bottom:;
+    right:10%;
+    margin-right:;
+}
+
+.tableLISTAcentral{
+	position:relative; 
+    top:50%; 
+    margin-top:5%;
+    left:25%;
+    margin-left:1%;
+    bottom:10%; 
+    margin-bottom:;
+    right:10%;
+    margin-right:;
+}
+
+.form-actionsJ{
+padding:19px 20px 20px;
+margin-top:5%;
+margin-bottom:20px;
+margin-left:-25%;
+background-color:#f5f5f5;
+border-top:1px solid #e5e5e5;*zoom:1
+}
+
+.form-actionsJ:before,.form-actionsJ:after{
+display:table;line-height:0;content:""
+}
+
+.form-actionsJ:after{
+clear:both
+}
