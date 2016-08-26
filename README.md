@@ -1,2 +1,2 @@
-# adminControlLife
-controle dos meus gastos mensais
+# AdminControlLife
+Sistema web, em desenvolvimento
